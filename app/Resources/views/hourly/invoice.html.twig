@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+<div class="col-lg-6">
+<h1>Hourly invoice</h1>
+<form ng-controller="InvoiceController">
+  <div class="form-group">
+    <label for="billTo">Bill To:</label>
+    <input type="text" class="form-control" id="billTo" aria-describedby="billTo" placeholder="Enter bill to">
+  </div>
+  <div class="form-group">
+    <label for="billTo">Date:</label>
+    <input type="text" class="form-control" id="date" aria-describedby="date" placeholder="Enter today's date">
+  </div>
+  <div class="form-group">
+    <label for="billTo">Description:</label>
+    <input type="text" class="form-control" id="billTo" aria-describedby="description" placeholder="Enter description">
+  </div>
+  <div class="form-group">
+    <label for="billTo">Hourly Price:</label>
+    <input type="text" class="form-control" id="hourlyPrice" aria-describedby="hourlyPrice" placeholder="Enter hourly price">
+  </div>
+  <div class="form-group">
+    <label for="billTo">Hours:</label>
+    <input type="text" class="form-control" id="hours" aria-describedby="hourlyPrice" placeholder="Enter hours">
+  </div>
+  <div class="form-group">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <span ng-show="!submitButton"><input type="submit" name="invoice-submit" id="invoice-submit" tabindex="4" class="form-control btn btn-primary" value="Submit Invoice" ng-click="invoice(formData)"></span>
+                <p ng-show="processing">Processing please wait....</p>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

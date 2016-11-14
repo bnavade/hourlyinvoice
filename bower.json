@@ -1,0 +1,23 @@
+{
+  "name": "houlyinvoice",
+  "description": "houlyinvoice",
+  "authors": [
+    "Bonface Navade <basuluda(at)yahoo.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/bnavade/Hourlyinvoice",
+  "moduleType": [],
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower",
+    "test",
+    "tests"
+  ],
+  "main": "",
+  "dependencies": {
+    "angular": "^1.5.3"
+  }
+}
