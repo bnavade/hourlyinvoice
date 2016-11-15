@@ -13,6 +13,7 @@ How to install
   * Install composer if you dont have it on your computer
   
   * Run 
+  $ bower update ( Make sure bower is installed)
   $ composer install
   $ php app/console server:run
 
