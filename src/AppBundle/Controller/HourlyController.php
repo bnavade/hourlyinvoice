@@ -16,33 +16,9 @@ class HourlyController extends Controller {
     }
     
     /**
-     * @Route("/hourly/create")
-     */
-    public function actionCreate() {
-      try {
-
-        // Logic here
-
-        return new JsonResponse([
-            'success' => true,
-            'data'    => ["url" => "http://localhost:8000/hourly/pdf"] // Your data here
-        ]);
-
-    } catch (\Exception $exception) {
-
-        return new JsonResponse([
-            'success' => false,
-            'code'    => $exception->getCode(),
-            'message' => $exception->getMessage(),
-        ]);
-
-    }
-    }
-    
-    /**
      * @Route("/hourly/pdf")
      */
-    public function actionPdf() {
+    public function actionDownload() {
         
     }
     

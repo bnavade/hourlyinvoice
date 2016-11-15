@@ -5,7 +5,7 @@ angular.module('hourlyInvoice', [])
        var invoice = {
            createInvoice: function(formData) {
              var method = 'POST';
-             var url = 'http://localhost:8080/hourly/create';
+             var url = 'http://localhost:8080/api/invoice/create';
         var request = 
                 $http({
                     method: method,

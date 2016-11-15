@@ -5,7 +5,7 @@
     "Bonface Navade <basuluda(at)yahoo.com>"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/bnavade/Hourlyinvoice",
+  "homepage": "https://github.com/bnavade/hourlyinvoice",
   "moduleType": [],
   "private": false,
   "ignore": [
@@ -18,6 +18,8 @@
   ],
   "main": "",
   "dependencies": {
-    "angular": "^1.5.3"
+    
+    "angular": "^1.5.3",
+    "bootstrap": "^3.3.6"
   }
 }
