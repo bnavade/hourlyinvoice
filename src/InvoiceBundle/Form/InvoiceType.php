@@ -15,11 +15,10 @@ class InvoiceType extends AbstractType{
      */
     public function buildForm(FormBuilderInterface $builder, array $options){
         $builder
-            ->add('billTo')
-            ->add('description')
-            ->add('hourlyPrice')
-            ->add('hours')
-        ;
+                ->add('billTo')
+                ->add('description')
+                ->add('hourlyPrice')
+                ->add('hours');
     }
 
     /**
@@ -39,6 +38,6 @@ class InvoiceType extends AbstractType{
      * @return string
      */
     public function getName(){
-        return "";
+        return "invoice";
     }
 }

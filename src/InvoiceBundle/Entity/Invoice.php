@@ -2,35 +2,37 @@
 // src/InvoiceBundle/Entity/Invoice.php
 namespace InvoiceBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 class Invoice {
     
     /**
      * @var string
+     * @Assert\NotBlank
      */
     private $billTo;
+    
     /**
      * @var string
      */
     private $date;
-    /**
-     * @var string
-     */
-    private $description;
-    /**
-     * @var string
-     */
-    private $hourlyPrice;
-    /**
-     * @var integer
-     */
-    private $hours;
     
     /**
-     * 
+     * @var string
+     * @Assert\NotBlank
      */
-    public function __construct() {
-        $this->date = new \DateTime();
-    }
+    private $description;
+    
+    /**
+     * @var string
+     * @Assert\NotBlank
+     */
+    private $hourlyPrice;
+    
+    /**
+     * @var integer
+     * @Assert\NotBlank
+     */
+    private $hours;
     
     /**
      * Set billTo
@@ -39,7 +41,7 @@ class Invoice {
      */
     public function setBillTo($billTo) {
         $this->billTo = $billTo;
-        return $this;
+        //return $this;
     }
     
     /**
@@ -50,6 +52,24 @@ class Invoice {
         return $this->billTo;
     }
     
+     /**
+     * Set date
+     * @param string $date
+     * @return  Invoice
+     */
+    public function setDate($date) {
+        $this->date = $date;
+    }
+    
+    /**
+     * Get billTo
+     * @return string
+     */
+    public function getDate() {
+        return $this->billTo;
+    }
+    
+    
     /**
      * Set description
      * @param string $description
@@ -57,7 +77,6 @@ class Invoice {
      */
     public function setDescription($description) {
         $this->description = $description;
-        return $this;
     }
     
     /**
@@ -75,7 +94,6 @@ class Invoice {
      */
     public function setHourlyPrice($hourlyPrice) {
         $this->hourlyPrice = $hourlyPrice;
-        return $this;
     }
     
     /**
@@ -83,7 +101,7 @@ class Invoice {
      * @return Invoice
      */
     public function getHourlyPrice() {
-        return $this->getHourlyPrice;
+        return $this->hourlyPrice;
     }
     
     /**
@@ -93,7 +111,6 @@ class Invoice {
      */
     public function setHours($hours) {
         $this->hours = $hours;
-        return $this;
     }
     
     /**

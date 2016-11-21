@@ -1,11 +1,15 @@
 'use strict';
 
 angular.module('hourlyInvoice', [])
+.config(function($interpolateProvider) {
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+})
 .factory("Invoice", ['$http', function($http) {
        var invoice = {
            createInvoice: function(formData) {
              var method = 'POST';
-             var url = 'http://localhost:8080/api/invoice/create';
+             var url = 'http://localhost:8000/api/invoice/create';
         var request = 
                 $http({
                     method: method,
@@ -18,12 +22,12 @@ angular.module('hourlyInvoice', [])
        return invoice;         
 }])
 .controller("InvoiceController", ['$scope', '$window', 'Invoice', function($scope, $window, Invoice) {
-        $scope.invoice = function() {
             $scope.invoiceButton = true;
             $scope.processing = false;
             $scope.submitted = true;
             $scope.error = {};
-            Invoice.createInvoice($scope.loginData)
+            $scope.invoice = function() {
+                Invoice.createInvoice($scope.invoiceData)
                             .success(function (response) {
                                 $scope.invoiceButton = false;
                                 $scope.processing = true;
@@ -32,12 +36,15 @@ angular.module('hourlyInvoice', [])
                             .error(function (errors) {
                                 $scope.processing = false;
                                 $scope.invoiceButton = false;
-                                alert(" An error occured while processing form.");
-                                //angular.forEach(errors, function (error) {
-                                //    $scope.error[error.field] = error.message;
-                                //});
+                                var children = errors.errors;
+                                angular.forEach(children, function (error) {
+                                    $scope.billToError = error.billTo.errors[0];
+                                    $scope.descriptionError = error.description.errors[0];
+                                    $scope.hourlyPriceError = error.hourlyPrice.errors[0];
+                                    $scope.hoursError = error.hours.errors[0];
+                                    console.log(error);
+                                });
                             });
         };
 }]);
-
 

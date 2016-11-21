@@ -8,8 +8,8 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\Invoice;
-use AppBundle\Form\InvoiceType;
+use InvoiceBundle\Entity\Invoice;
+use InvoiceBundle\Form\InvoiceType;
 class InvoiceController extends FOSRestController {
     
     /**
@@ -22,17 +22,20 @@ class InvoiceController extends FOSRestController {
      */
     
     public function createAction(Request $request){
-        $invoice = new Invoice();
-        $form = $this->createForm(new InvoiceType(), $invoice);
-        $form->handleRequest($request);
+        $entity = new Invoice();
+        $form = $this->createForm(new InvoiceType(), $entity);
+        //$form->handleRequest($request);
+        $form->bind($request);
 
         if ($form->isValid()) {
-            return array("success" => true);
+            //$em = $this->getDoctrine()->getManager();
+            //$em->persist($entity);
+            //$em->flush();
+            
+            return $this->redirectView('pdf', array('id' => $entity->getId()));
 
-        }
-
-        return array(
-            'form' => $form,
-        );
+        } 
+        
+        return array('form' => $form);
     }
 }
