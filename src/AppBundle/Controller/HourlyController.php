@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
+
 class HourlyController extends Controller {
     /**
      * @Route("/hourly/invoice")
@@ -16,10 +17,21 @@ class HourlyController extends Controller {
     }
     
     /**
-     * @Route("/hourly/pdf")
+     * @Route("/hourly/download")
      */
     public function actionDownload() {
+        return $this->render('hourly/download.html.twig');
+    }
+    
+    /**
+     * @Route("/hourly/pdf")
+     */
+    public function actionPdf() {
+        $html = '<h1>Hello world!</h1>';
         
+        $mpdf = new \Mpdf\Mpdf();
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
     }
     
     

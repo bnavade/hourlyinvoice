@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+<div class="col-lg-6">
+<h1>Hourly invoice downloads</h1>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Date</th>
+    <th>Download</th>
+  </tr>
+  <tr>
+    <td>Test</td>
+    <td>12/06/2016</td>
+    <td><i fa fa-pdf fa-fw></i><a href="/hourly/pdf">download</a></td>
+  </tr>
+</table>
+</div>
+</div>
+</div>
+{% endblock %}

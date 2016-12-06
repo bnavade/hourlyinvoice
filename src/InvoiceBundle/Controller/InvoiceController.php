@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use InvoiceBundle\Entity\Invoice;
 use InvoiceBundle\Form\InvoiceType;
+
 class InvoiceController extends FOSRestController {
     
     /**
@@ -31,8 +32,7 @@ class InvoiceController extends FOSRestController {
             //$em = $this->getDoctrine()->getManager();
             //$em->persist($entity);
             //$em->flush();
-            
-            return $this->redirectView('pdf', array('id' => $entity->getId()));
+            return true;
 
         } 
         

@@ -10,6 +10,23 @@
     <script src="{{asset('vendor/bower_components/angular/angular.min.js')}}"></script>
     <script src="{{asset('vendor/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
 </head>
 <body ng-app="hourlyInvoice">
   <nav class="navbar navbar-inverse" role="navigation">
@@ -18,6 +35,7 @@
     </div>
     <ul class="nav navbar-nav">
         <li><a href="/hourly/invoice">Hourly Invoice</a></li>
+        <li><a href="/hourly/download">Invoice download</a></li>
     </ul>
 </nav>
     {% block content %}
