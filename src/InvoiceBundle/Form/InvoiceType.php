@@ -1,5 +1,9 @@
 <?php
 // src/InvoiceBundle/Form/InvoiceType.php
+/**
+ * Created by Bonface Navade.
+ * 12/07/2016
+ */
 
 namespace InvoiceBundle\Form;
 
@@ -17,6 +21,7 @@ class InvoiceType extends AbstractType{
         $builder
                 ->add('billTo')
                 ->add('description')
+                ->add('developer')
                 ->add('hourlyPrice')
                 ->add('hours');
     }

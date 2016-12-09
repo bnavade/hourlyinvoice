@@ -12,6 +12,11 @@
     <p class="help-block help-block-error" style="color: red;">[[billToError]]</p>
   </div>
   <div class="form-group">
+    <label for="description">Developer:</label>
+    <input type="text" id="developer"  name="developer" ng-model="invoiceData.developer" class="form-control" aria-describedby="developer" placeholder="Enter developer name">
+    <p class="help-block help-block-error" style="color: red;">[[developerError]]</p>
+  </div>
+  <div class="form-group">
     <label for="description">Description:</label>
     <input type="text" id="description"  name="description" ng-model="invoiceData.description" class="form-control" aria-describedby="description" placeholder="Enter description">
     <p class="help-block help-block-error" style="color: red;">[[descriptionError]]</p>
@@ -30,11 +35,11 @@
   <div class="form-group">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
-                <span ng-show="!submitButton"><input type="submit" name="invoice-submit" id="invoice-submit" tabindex="4" class="form-control btn btn-primary" value="Submit Invoice" ng-click="invoice(invoiceData)"></span>
-                <p ng-show="processing">Processing please wait....</p>
+                <input type="submit" name="invoice-submit" id="invoice-submit" tabindex="4" class="form-control btn btn-primary" value="Submit Invoice" ng-click="invoice(invoiceData)">
             </div>
         </div>
     </div>
+    <p>[[success]]</p>
 </form>
 </div>
 </div>

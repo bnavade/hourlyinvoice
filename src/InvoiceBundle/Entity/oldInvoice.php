@@ -19,39 +19,37 @@ class Invoice {
     private $id;
     
     /**
-     * @ORM\Column(type="string", length=100, name="bill_to")
+     * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
      */
     private $billTo;
     
-    
     /**
-     * @ORM\Column(type="text", length=100)
-     */
-    private $description;
-    
-    /**
-     * @ORM\Column(type="text", length=100)
-     */
-    private $developer;
-    
-    /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date", length=20)
      */
     private $date;
     
     /**
+     * @ORM\Column(type="text", length=100)
+     * @Assert\NotBlank
+     */
+    private $description;
+    
+    /**
      * @ORM\Column(type="decimal", scale=2)
+     * @Assert\NotBlank
      */
     private $hourlyPrice;
     
     /**
      * @ORM\Column(type="integer", length=20)
+     * @Assert\NotBlank
      */
     private $hours;
 
     /**
      * Get id
+     *
      * @return integer
      */
     public function getId(){
@@ -60,7 +58,9 @@ class Invoice {
 
     /**
      * Set billTo
+     *
      * @param string $billTo
+     *
      * @return Invoice
      */
     public function setBillTo($billTo){
@@ -71,34 +71,40 @@ class Invoice {
 
     /**
      * Get billTo
+     *
      * @return string
      */
     public function getBillTo(){
         return $this->billTo;
     }
-    
+
     /**
-     * Set developer
-     * @param string $developer
+     * Set date
+     *
+     * @param \DateTime $date
+     *
      * @return Invoice
      */
-    public function setDeveloper($developer){
-        $this->developer = $developer;
+    public function setDate(\DateTime $date = null){
+        $this->date = $date;
 
         return $this;
     }
 
     /**
-     * Get developer
-     * @return string
+     * Get date
+     *
+     * @return \DateTime
      */
-    public function getDeveloper(){
-        return $this->developer;
+    public function getDate(){
+        return $this->date;
     }
 
     /**
      * Set description
+     *
      * @param string $description
+     *
      * @return Invoice
      */
     public function setDescription($description){
@@ -109,6 +115,7 @@ class Invoice {
 
     /**
      * Get description
+     *
      * @return string
      */
     public function getDescription(){
@@ -117,7 +124,9 @@ class Invoice {
 
     /**
      * Set hourlyPrice
+     *
      * @param string $hourlyPrice
+     *
      * @return Invoice
      */
     public function setHourlyPrice($hourlyPrice){
@@ -128,6 +137,7 @@ class Invoice {
 
     /**
      * Get hourlyPrice
+     *
      * @return string
      */
     public function getHourlyPrice(){
@@ -136,7 +146,9 @@ class Invoice {
 
     /**
      * Set hours
+     *
      * @param integer $hours
+     *
      * @return Invoice
      */
     public function setHours($hours){
@@ -147,9 +159,29 @@ class Invoice {
 
     /**
      * Get hours
+     *
      * @return integer
      */
     public function getHours(){
         return $this->hours;
     }
+    
+        /**
+     * Set datetime
+     * @param datetime $date
+     * @return Invoice
+     */
+    //public function setDate(){
+    //    $this->date = new \DateTime("now");
+//
+    //    return $this;
+    //}
+
+    /**
+     * Get datetime
+     * @return Invoice
+     */
+    //public function getDate(){
+    //    return $this->date;
+    //}
 }
