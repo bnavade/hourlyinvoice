@@ -21,7 +21,7 @@ framework:
     validation:      { enable_annotations: true }
     #serializer:      { enable_annotations: true }
     templating:
-        engines: ['twig']
+        engines: ['twig', 'php']
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
@@ -64,6 +64,11 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        entity_managers:
+            dql:
+                datetime_functions:
+                  date: InvoiceBundle\Doctrine\DQL\Date
+                
 
 # Swiftmailer Configuration
 swiftmailer:
