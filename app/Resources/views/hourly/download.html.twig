@@ -10,10 +10,12 @@
     <th>Invoice Date</th>
     <th>Download Invoice</th>
   </tr>
+  {% for list in lists %}
   <tr>
-    <td>2016-12-09</td>
-    <td><i fa fa-pdf fa-fw></i><a href="/hourly/download?date=2016-12-09" target="blank">download invoice</a></td>
+    <td>{{list.date|date("Y-m-d")}}</td>
+    <td><i fa fa-pdf fa-fw></i><a href="/hourly/download?date={{list.date|date("Y-m-d")}}" target="blank">download invoice</a></td>
   </tr>
+  {% endfor %}
 </table>
 </div>
 </div>

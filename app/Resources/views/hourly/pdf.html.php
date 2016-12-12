@@ -25,64 +25,20 @@
     </head>
     <body>
         <?php
-        /*        
-        $billTo = "Skillman Lending";
-        $invoiceDate = "12/09/2016";
-        
-        // set initial data
+        $invoice = $results[0];  // will be used for single result        
+        $billTo = $invoice['billTo'];
+        $invoiceDate = 'N/A';
+        if($invoice['date'] instanceof \DateTime) {
+        $invoiceDate = $invoice['date']->format('m/d/Y');
         $subTotal = '';
-        $table = '';
-        // Table to display invoice data
-        $table += '<tr>';
-        // Loop through results
-        foreach($invoices as $row) {
-            $table += '<td>' . $row['developer']. '</td>';
-            $table += '<td>' . $row['description']. '</td>';
-            $table += '<td>' . $row['hourlyPrice']. '</td>';
-            $table += '<td>' . $row['hours']. '</td>';
-            $table += '<td>' . $row['hourlyPrice'] * $row['hours']. '</td>';
-            // Get subtotal
-            $subTotal += $row['hourlyPrice'] * $row['hours'];
         }
-        // End table row
-        $table += '</tr>';
-        
-        // Subtotal
-        $table += '<tr>';
-        $table += '<td></td>';
-        $table += '<td></td>';
-        $table += '<td></td>';
-        $table += '<td>SUBTOTAL</td>';
-        $table += '<td>'. $subTotal. '</td>';
-        $table += '</tr>';
-        
-        // Tax
-        $tax= 0.00;
-        $table += '<tr>';
-        $table += '<td></td>';
-        $table += '<td></td>';
-        $table += '<td></td>';
-        $table += '<td>TAX</td>';
-        $table += '<td>'. $tax. '</td>';
-        $table += '</tr>';
-        
-        // Total
-        $total = $subTotal + $tax;
-        $table += '<tr>';
-        $table += '<td></td>';
-        $table += '<td></td>';
-        $table += '<td></td>';
-        $table += '<td>TOTAL</td>';
-        $table += '<td>'. $total. '</td>';
-        $table += '</tr>';
-        */
         ?>
         <div class="section">
             <div class="section">
-                <h3>Bill To: '. $billTo . '</h3>
+                <h3>Bill To: <?php echo $billTo; ?> </h3>
             </div>
             <div class="section">
-                <p>DATE: '. $invoiceDate .'</p>
+                <p>DATE: <?php echo $invoiceDate; ?></p>
                 <p>INVOICE#</p>
                 <p>Customer ID</p>
             </div>
@@ -94,9 +50,45 @@
                 <th>Hourly Price</th>
                 <th>Hours</th>
                 <th>Total</th>
-            </tr>'
-            . $table . 
-            '<tr></tr>
+            </tr>
+            <?php foreach($results as $row): ?>
+            <tr>
+                <td><?php echo $row['developer']; ?></td>
+                <td><?php echo $row['description']; ?></td>
+                <td><?php echo sprintf('%0.2f', $row['hourlyPrice']); ?></td>
+                <td><?php echo $row['hours']; ?> </td>
+                <td><?php echo sprintf('%0.2f', $row['hourlyPrice'] * $row['hours']); ?></td>
+                <?php
+                $subTotal += $row['hourlyPrice'] * $row['hours']; 
+                ?>
+            </tr>
+            <?php endforeach; ?>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>SUBTOTAL</td>
+                <td><?php echo sprintf('%0.2f', $subTotal); ?></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>TAX</td>
+                <td><?php 
+                $tax = 0.00; 
+                echo sprintf('%0.2f', $tax); 
+                ?>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>TOTAL</b></td>
+                <td><b><?php echo sprintf('%0.2f', $subTotal + $tax); ?></b></td>
+            </tr>
+            <tr></tr>
         </table>
         <div class="row">
             <h3>Other comments or special instructions</h3>

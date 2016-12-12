@@ -10,7 +10,7 @@ namespace InvoiceBundle\Model;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class InvoiceD {
+class InvoiceDb {
     /**
      * @var $repository EntityManager
      */
@@ -18,19 +18,15 @@ class InvoiceD {
     /**
      * @var $manager EntityManager
      */
-    private $manager;
+    private $em;
     
-    public function __construct(){
-        $em = new EntityManager();
+    public function __construct(EntityManager $em){
+        $this->em = $em;
         // if using repository methods
-        $this->repository = $em->getDoctrine()->getRepository('InvoiceBundle:Invoice');
+        // $em = $this->getDoctrine()->getRepository('InvoiceBundle:Invoice');
+        //$this->repository = $em
         // Example
         // $result = $this->repository->findAll();
-        
-        // if using manager
-        $this->manager = $em->getDoctrine()->getManager();
-        // Example
-        // Used for sql like queries with dql
     }
     
     // Save data
@@ -43,8 +39,16 @@ class InvoiceD {
     public function getAllInvoice() {
         //$sql = "SELECT DISTINCT DATE_FORMAT(invoice.Invdate, '%Y-%m-%d') FROM InvoiceBundle:Invoice invoice";
         $sql = "SELECT DISTINCT invoice.date FROM InvoiceBundle:Invoice invoice";
-        $query = $this->manager->createQuery($sql);
+        $query = $this->em->createQuery($sql);
         return $query->getResult();
     }
+    
+    // Get invoice by date
+    public function getInvoiceByDate($date) {
+        $sql = "SELECT invoice FROM InvoiceBundle:Invoice invoice WHERE invoice.date = :date";
+        $query = $this->em->createQuery($sql)->setParameter('date', $date);
+        return $query->getArrayResult();
+    }
+            
     
 }

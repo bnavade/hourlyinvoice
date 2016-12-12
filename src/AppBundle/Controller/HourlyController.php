@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use InvoiceBundle\Model\
+use InvoiceBundle\Model\InvoiceDb;
 
 class HourlyController extends Controller {
     /**
@@ -20,20 +20,17 @@ class HourlyController extends Controller {
      */
     public function actionDownload(Request $request) {
         $em = $this->getDoctrine()->getManager();
+        $InvoiceDb = new InvoiceDb($em);
         $date =  $request->query->get('date');
         if(!empty($date)) {
-        $sql = "SELECT  invoice FROM InvoiceBundle:Invoice invoice";
-        $query = $em->createQuery($sql);
-        $invoices = $query->getResult();
-        $invoice = $invoices[0];  // will be used for single result
+        $results = $InvoiceDb->getInvoiceByDate($date);
         $mpdfService = $this->get('tfox.mpdfport');
-        $html = $this->renderView('hourly/pdf.html.php', array('invoice' => $invoice, 'invoices' => $invoices));       
+        $html = $this->renderView('hourly/pdf.html.php', array('results' => $results));       
         $response = $mpdfService->generatePdfResponse($html);
-        return $response; 
+        return $response;
         }
        
-        $lists = $query->getResult();
-        
+        $lists = $InvoiceDb->getAllInvoice();
         return $this->render('hourly/download.html.twig', array('lists' => $lists));
     }
 }

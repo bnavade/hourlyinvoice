@@ -21,7 +21,7 @@ class InvoiceController extends FOSRestController {
      * Create a new Invoice
      * @var Request $request
      * @return View|array
-     *
+     * @return Post
      * @View()
      * @Post("/invoice/create")
      */
@@ -31,13 +31,15 @@ class InvoiceController extends FOSRestController {
         $form = $this->createForm(new InvoiceType(), $entity);
         $form->handleRequest($request);
         if ($form->isValid()) {
+            if($entity->getDate() === null) {
+                $entity->setDate(new \DateTime('now'));
+            }
             $em = $this->getDoctrine()->getManager();
             // tells Doctrine you want to (eventually) save the Product (no queries yet)
             $em->persist($entity);
             // actually executes the queries (i.e. the INSERT query)
             $em->flush();
             return new JsonResponse(array('message' => 'Data saved.'));
-            //return new Response( ['message' => 'Saved new product with id '. $entity->getId()]);
 
         } else {
         

@@ -24,7 +24,6 @@ class Invoice {
      */
     private $billTo;
     
-    
     /**
      * @ORM\Column(type="text", length=100)
      */
@@ -36,7 +35,7 @@ class Invoice {
     private $developer;
     
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $date;
     
@@ -94,6 +93,26 @@ class Invoice {
      */
     public function getDeveloper(){
         return $this->developer;
+    }
+    
+    /**
+     * Set date
+     * @param date $date
+     * @return Invoice
+     */
+    public function setDate(\DateTime $date = null){
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate(){
+        return $this->date;
     }
 
     /**
