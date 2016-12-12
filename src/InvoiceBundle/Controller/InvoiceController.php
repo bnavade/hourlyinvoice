@@ -12,6 +12,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use InvoiceBundle\Model\InvoiceDb;
 use InvoiceBundle\Entity\Invoice;
 use InvoiceBundle\Form\InvoiceType;
 
@@ -35,10 +36,8 @@ class InvoiceController extends FOSRestController {
                 $entity->setDate(new \DateTime('now'));
             }
             $em = $this->getDoctrine()->getManager();
-            // tells Doctrine you want to (eventually) save the Product (no queries yet)
-            $em->persist($entity);
-            // actually executes the queries (i.e. the INSERT query)
-            $em->flush();
+            $InvoiceDb = new InvoiceDb($em);
+            $InvoiceDb->save($entity);
             return new JsonResponse(array('message' => 'Data saved.'));
 
         } else {
